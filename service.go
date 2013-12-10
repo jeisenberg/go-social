@@ -2,6 +2,7 @@ package service
 
 import (
   "net/http"
+  "log"
 )
 
 type Service struct {
@@ -18,5 +19,5 @@ func (s Service) Fetch() {
     return nil
   }
   defer resp.Body.Close()
-  revel.INFO.Printf("%s", resp.Body)
+  log.Printf("%s", resp.Body)
 }
