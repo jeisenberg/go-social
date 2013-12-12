@@ -6,7 +6,7 @@ import (
   "encoding/json"
   //"io/ioutil"
   "github.com/jeisenberg/go-social/translators"
-  //"github.com/jeisenberg/go-social/normalized"
+  "github.com/jeisenberg/go-social/normalized"
 )
 
 
@@ -20,7 +20,7 @@ type Service struct {
 
 //type Receiver struct {}
 
-func (s Service) Fetch() {
+func (s Service) Fetch() (posts []normalized.Post){
   var x = new(translators.GPResults)
   resp, err := http.Get(s.FetchUrl)
   if err != nil {
@@ -37,9 +37,8 @@ func (s Service) Fetch() {
     log.Printf("%s somethgin err", err)
     return
   }
-
-  log.Printf("%s somethgin obdy", x)
-  log.Printf("%s something", resp.Body)
+  posts = x.Normalize()
+  return posts
 }
 
 
