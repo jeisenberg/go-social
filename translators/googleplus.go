@@ -15,7 +15,7 @@ type GPItem struct {
   Kind string `json:"kind"`
   Title string `json:"title"`
   GPActor `json:"actor"`
-  GPObject `json:"object'`
+  GPObject `json:"object"`
 }
 
 type GPResults struct {

@@ -7,6 +7,6 @@ type Post struct {
   Title string
   AuthorName string
   Image string
-  Body byte
+  Body string
   BodyPhoto string
 }
