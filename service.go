@@ -21,7 +21,6 @@ type Service struct {
 //type Receiver struct {}
 
 func (s Service) Fetch() (posts []normalized.Post){
-  var x = new(translators.GPResults)
   resp, err := http.Get(s.FetchUrl)
   if err != nil {
     return
@@ -30,14 +29,22 @@ func (s Service) Fetch() (posts []normalized.Post){
   defer resp.Body.Close()
   switch {
   case s.Name == "google plus":
-    x = new(translators.GPResults)
+    x := new(translators.GPResults)
+    err = json.NewDecoder(resp.Body).Decode(&x)
+    if err != nil {
+      log.Printf("%s somethgin err", err)
+      return
+    }
+    posts = x.Normalize()
+  case s.Name == "instagram":
+    x := new(translators.IGResults)
+    err = json.NewDecoder(resp.Body).Decode(&x)
+    if err != nil {
+      log.Printf("%s somethgin err", err)
+      return
+    }
+    posts = x.Normalize()
   }
-  err = json.NewDecoder(resp.Body).Decode(&x)
-  if err != nil {
-    log.Printf("%s somethgin err", err)
-    return
-  }
-  posts = x.Normalize()
   return posts
 }
 
