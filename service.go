@@ -27,8 +27,6 @@ type Response struct {
   AccessToken string `json:"access_token"`
 }
 
-//type Receiver struct {}
-
 func (s Service) Fetch() (posts []normalized.Post){
   if s.Oauth == true && s.OauthToken != "" {
     return s.FetchOauth(s.OauthToken)
