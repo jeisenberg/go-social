@@ -7,15 +7,10 @@ type IGResults struct {
 }
 
 type IGMedia struct {
-  //Comments []IGComments
   Images IGImages `json:"images"`
   Caption IGCaption `json:"caption"`
   User IGUser `json:"user"`
 }
-
-// type IGComment struct {
-
-// }
 
 type IGImages struct {
   LowResolution IGImage `json:"low_resolution"`
